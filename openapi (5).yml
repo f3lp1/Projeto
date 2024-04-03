@@ -1,0 +1,109 @@
+openapi: 3.0.3
+info:
+  title: Felipe Test
+  version: 1.0.0
+  description: An for login
+servers:
+  - url: http://localhost:8000
+    description: Local server
+tags:
+  - name: Admin
+    description: Routes related to the administration of the api.
+paths:
+  /api/users:
+    post:
+      summary: Create a new user
+      tags:
+        - Admin
+      requestBody:
+        description: The credentials to be added to the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserBody'
+      responses:
+        "201":
+          description: UserCreated
+        "400":
+          description: Invalid body for user creation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/users/login:
+    post:
+      summary: Create a new session
+      tags:
+        - Admin
+      requestBody:
+        description: The email and password of a user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginBody'
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    CreateUserBody:
+      type: object
+      required: [
+        email,
+        password
+      ]
+      properties:
+        email:
+          type: string
+          description: Username used to access the system.
+          example: "something@gmail.com"
+        password:
+          type: string
+          description: The user password.
+          example: "dontknow"
+        name:
+          type: string
+          description: User name.
+          example: "Felipe"
+    LoginBody:
+      type: object
+      required: [
+        email,
+        password
+      ]
+      properties:
+        email:
+          type: string
+          description: Username used to access the system.
+          example: "something@gmail.com"
+        password:
+          type: string
+          description: The user password.
+          example: "dontknow"
+    Session:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The JWT token
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+          readOnly: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+          example: "Some error message"
