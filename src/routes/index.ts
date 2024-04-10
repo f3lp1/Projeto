@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { userRoutes } from "./user.routes";
 
-const Routes = Router
+// Problema era aq, n e saudavel acessar os arguments de uma funcao, mas a funcionalidade ja existe atraves do sistema de middleware do express
+const routes = Router();
 
-Routes.arguments("/users", userRoutes)
+routes.use('/users', userRoutes);
 
-export { Routes }
+export { routes }

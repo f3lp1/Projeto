@@ -10,8 +10,8 @@ const authController = new AuthController();
 
 const userRoutes = Router();
 
-userRoutes.post("/", createUserController.handle);
+userRoutes.post("/", createUserController.handle); // Essa rota
+userRoutes.post("/", authController.authenticate); // E essa vao conflitar
 userRoutes.get("/", AuthMiddlwares, getAllUsersController.handle);
-userRoutes.post("/", authController.authenticate);
 
 export { userRoutes };
