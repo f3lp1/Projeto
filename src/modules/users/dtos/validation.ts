@@ -1,14 +1,14 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 const schemaPrisma = z.object({
-    name: z.string(),
-    email: z.string(),
-    password: z.string()
-})
+  name: z.string(),
+  email: z.string(),
+  password: z.string(),
+});
 const result = schemaPrisma.safeParse({
-    name: "",
-    email: "",
-    password: ""
-})
+  name: "",
+  email: "",
+  password: "",
+});
 
-console.log(result)
+console.log(result);
