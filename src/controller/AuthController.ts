@@ -1,27 +1,29 @@
-import { compare} from "bcryptjs"; 
+import { compare } from "bcryptjs";
 import { Request, Response } from "express";
 import { prisma } from "../prisma/client";
 import { sign } from "jsonwebtoken";
 
 export class AuthController {
     async authenticate(req: Request, res: Response) {
-        const { email, password } = req.body
+        const { email, password } = req.body;
 
-        const user = await prisma.user.findUnique({where: { email } })
+        const user = await prisma.user.findUnique({ where: { email } });
 
         if (!user) {
-            return res.json({ error: "User not found"})
+            return res.json({ error: "User not found" });
+            //retornar erro 401
         }
-        const isValuePassword = await compare(password, user.password)
+        const isValuePassword = await compare(password, user.password);
 
-        if(!isValuePassword) {
-            return res.json({ error: "password invalid" })
+        if (!isValuePassword) {
+            return res.json({ error: "password invalid" });
+            //retornar 401
         }
 
-        const token = sign({id: user.id}, "secret", {expiresIn: "id" })
+        const token = sign({ id: user.id }, "secret", { expiresIn: "id" });
 
-        const {id} = user
-        
-        return res.json({ user: { id, email }, token })
+        const { id } = user;
+
+        return res.json({ user: { id, email }, token });
     }
 }

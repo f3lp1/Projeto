@@ -1,29 +1,32 @@
-import { User } from "@prisma/client";
+import { z } from "zod";
 import { AppError } from "../../../../errors/AppError";
 import { prisma } from "../../../../prisma/client";
 import { CreateUserDTO } from "../../dtos/createUserDTO";
-import { hash } from "bcrypt";
+import { SHA256 } from "crypto-js";
+import { User } from "@prisma/client";
+
+const CreateUserSchema = z.object({
+  name: z.string(),
+  email: z.string(),
+  password: z.string(),
+});
 
 export class CreateUserUseCase {
   async execute({ name, email, password }: CreateUserDTO): Promise<User> {
-    // Verificar se o usuário já existe
-    const userAlreadyExists = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    // Validar os dados de entrada
+    const validationResult = CreateUserSchema.safeParse({ name, email, password });
 
-    if (userAlreadyExists) {
-      throw new AppError("User already exists!");
+    if (!validationResult.success) {
+      throw new AppError("Invalid user data");
     }
 
     // Criar o usuário
-    const hash_password = await hash(password, 8)
+    const hash_password =  SHA256(password).toString();
     const user = await prisma.user.create({
       data: {
         name,
         email,
-        password: hash_password
+        password: hash_password,
       },
     });
 

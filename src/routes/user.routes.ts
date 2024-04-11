@@ -10,8 +10,8 @@ const authController = new AuthController();
 
 const userRoutes = Router();
 
-userRoutes.post("/", createUserController.handle);
+userRoutes.post("/create", createUserController.handle);
 userRoutes.get("/", AuthMiddlwares, getAllUsersController.handle);
-userRoutes.post("/", authController.authenticate);
+userRoutes.post("/authenticate", authController.authenticate);
 
 export { userRoutes };

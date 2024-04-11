@@ -8,7 +8,7 @@ const schemaPrisma = z.object({
 const result = schemaPrisma.safeParse({
     name: "",
     email: "",
-    password: ""
-})
+    password: "",
+});
 
 console.log(result)
