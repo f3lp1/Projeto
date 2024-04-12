@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --files src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only --files src/server.ts"
   },
   "keywords": [],
   "author": "",
