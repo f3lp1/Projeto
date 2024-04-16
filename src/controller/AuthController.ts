@@ -2,16 +2,7 @@ import { compare } from "bcryptjs";
 import { Request, Response } from "express";
 import { prisma } from "../prisma/client";
 import { sign } from "jsonwebtoken";
-
-export class AppError {
-    public readonly message: string;
-    public readonly statusCode: number;
-
-    constructor(message: string, statusCode = 400) {
-        this.message = message;
-        this.statusCode = statusCode;
-    }
-}
+import { AppError } from "../errors/AppError";
 
 export class AuthController {
     async authenticate(req: Request, res: Response) {

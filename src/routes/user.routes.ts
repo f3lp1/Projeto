@@ -1,17 +1,12 @@
 import { Router } from "express";
-import { CreateUserController } from "../modules/users/useCases/createUser/CreateUserController";
-import { GetAllUsersController } from "../modules/users/useCases/createUser/getAllUsers/GetAllUsersController";
-import { AuthController } from "../controller/AuthController";
 import { AuthMiddlwares } from "../middlewares/auth";
+import { UserController } from "../controller/UserController";
 
-const createUserController = new CreateUserController();
-const getAllUsersController = new GetAllUsersController();
-const authController = new AuthController();
+const userController = new UserController();
 
 const userRoutes = Router();
 
-userRoutes.post("/create", createUserController.handle);
-userRoutes.get("/getall", AuthMiddlwares, getAllUsersController.handle);
-userRoutes.post("/authenticate", authController.authenticate);
+userRoutes.post("/", userController.create);
+userRoutes.get("/", AuthMiddlwares, userController.list);
 
 export { userRoutes };
