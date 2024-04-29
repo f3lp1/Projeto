@@ -26,7 +26,7 @@ describe('Test validity of code', () => {
     req = {
       headers: {
         authorization: `Bearer ${sign({ id: 'diferente' }, 'secret')}`
-      }
+      } 
     } as any as Request;
   });
 

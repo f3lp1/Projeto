@@ -1,16 +1,3 @@
-
-// export class CreateUserController {
-// async handle(req: Request, res: Response) {
-//    const { name, email, password } = req.body;
-
-//    const createUserUseCase = new CreateUserUseCase();
-
-//     const result = await createUserUseCase.execute({ name, email, password });
-
-//    return res.status(201).json(result);
-// }
-//}
-
 import { CreateUserUseCase } from "../src/modules/users/useCases/createUser/createUserUseCase";
 import { prisma } from "../src/prisma/client";
 import { User } from "@prisma/client";
