@@ -10,15 +10,7 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-.container {
-    width: 100vw;
-    height: 100vh;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
 
 .container .header {
     margin-bottom: 30px;
@@ -37,11 +29,7 @@ body {
 
 }
 
-.container form .inputContainer {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-}
+
 
 .container form .inputContainer label {
     font-weight: 400;
@@ -100,12 +88,7 @@ body {
     opacity: 0.8;
 }
 
-.container form .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
+
 
 .container form .footer:hover a {
     font-weight: 400;
