@@ -1,14 +1,26 @@
 import { LayoutComponents } from "../../components/LayoutComponents"
 import { Link } from "react-router-dom"
+import { api } from "../../services/api"
 
 export const Register = () => {
-    return (
+    const handleSaveUser = async (e) => {
+      e.preventDefault()
+      const data = {
+        email, 
+        password, 
+        name,
+      };
+
+      const response = await api.post("/create", data);
+      console.log(response.data);
+    }
+  return (
 <LayoutComponents>
 <div className="container">
     <header className="header">
       <span>Register System</span>
     </header>
-<form>
+<form onSubmit={handleSaveUser}>
     <div className="inputContainer">
         <label htmlFor="name">Name</label>
         <input
@@ -39,8 +51,7 @@ export const Register = () => {
         />
       </div>
 
-      <button className="button">
-        Sign up
+      <button className="button" type="submit">Sign up
       </button>
 
       <div className="footer">

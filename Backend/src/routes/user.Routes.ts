@@ -9,6 +9,6 @@ const getAllUsersController = new GetAllUsersController();
 const userRoutes = Router();
 
 userRoutes.post("/create", createUserController.handle);
-userRoutes.get("/", AuthMiddlwares, getAllUsersController.handle);
+userRoutes.get("/users", AuthMiddlwares, getAllUsersController.handle);
 
 export { userRoutes };
