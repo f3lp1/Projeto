@@ -2,16 +2,16 @@ import "express-async-errors";
 import express, { NextFunction, Request, Response } from "express";
 import { AppError } from "./errors/AppError";
 import { routes } from "./routes";
-import cors from "cors";
-
+import cors from 'cors';
+import { authRoutes } from "./routes/auth.routes";
 const app = express();
 
-app.use(cors())
 app.use(express.json());
 
 app.use(routes);
-
-app.get('/', (req, res) => {
+app.use(authRoutes)
+app.use(cors());
+app.get('/users', (req, res) => {
   res.send('Server iniciado')
 })
 
@@ -31,6 +31,4 @@ app.use(
   }
 );
 
-app.listen(8000, () => 
-  console.log("Server is running in port 8000 ")
-);
+app.listen(8000, () => console.log("Server is running in port 8000 "));
