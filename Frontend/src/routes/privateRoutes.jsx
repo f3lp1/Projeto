@@ -1,11 +1,8 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/auth";
 import { Navigate, Outlet } from "react-router-dom";
+import { AuthContext } from "../context/auth";
 
-
-
-
-export const privateRoute = () => {
-    const { signed } = useContext(AuthContext);
-    return signed ? <Outlet /> : <Navigate to="/login" />;
+export const PrivateRoute = () => {
+  const { signed } = useContext(AuthContext);
+  return signed ? <Outlet /> : <Navigate to="/auth" />;
 };

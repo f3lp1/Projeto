@@ -5,7 +5,7 @@ import { AppRouter } from "./routes";
 export const App = () => {
   return (
     <AuthProvider>
-    <AppRouter />
+      <AppRouter />
     </AuthProvider>
   )
 }
